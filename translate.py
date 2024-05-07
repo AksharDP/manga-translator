@@ -1,5 +1,5 @@
-from paddleocr import PaddleOCR
 from deep_translator import GoogleTranslator
+from paddleocr import PaddleOCR
 
 
 def get_text(img_path, lang):

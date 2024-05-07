@@ -1,13 +1,13 @@
-from ultralytics import YOLO
-import torch
-from segmentation import segmentation
-import os
-import sys
-from PIL import Image
+import configparser
 import cv2
 import numpy as np
-from translate import translate, get_text
-import configparser
+import os
+import sys
+from segmentation import segmentation
+from translate import get_text, translate
+import torch
+from ultralytics import YOLO
+import requests
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -16,14 +16,7 @@ config.read("config.ini")
 language = config["ocr"]["language"]
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-# speech bubble detection model
-model = YOLO("best.pt")
-device = "cuda" if torch.cuda.is_available() else "cpu"
-conf = 0.3
-verbose = False
-show_labels = False
-show_conf = False
-augment = False
+segmentation_model = "https://huggingface.co/AksharPatel/manga-speech-bubble-segmentation/resolve/main/best.pt?download=true"
 
 # text
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -147,6 +140,27 @@ def handle_speech_bubbles(results):
 
 
 if __name__ == "__main__":
+
+    # donwload segmentation model as best.pt
+    if not os.path.exists("best.pt"):
+        print("Downloading segmentation model...")
+        # download model through python not wget
+        with requests.get(segmentation_model, stream=True) as r:
+            with open("best.pt", "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            r.close()
+        print("Segmentation model downloaded.")
+
+    # speech bubble detection model
+    model = YOLO("best.pt")
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    conf = 0.3
+    verbose = False
+    show_labels = False
+    show_conf = False
+    augment = False
+
     if not os.path.exists("input"):
         os.makedirs("input")
         os.makedirs("temp")
@@ -156,6 +170,7 @@ if __name__ == "__main__":
 
     files = os.listdir("input")
     for file in files:
+
         seg = segmentation(
             f"input/{file}",
             model,
