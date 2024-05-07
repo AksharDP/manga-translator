@@ -34,3 +34,11 @@ python main.py
 Put all the images that you would like to translate into the input folder that is created when you run the program the first time.
 
 You can also change the language detection for PaddleOCR in config.ini
+
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource.jpg">
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_2.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_2.jpg">
