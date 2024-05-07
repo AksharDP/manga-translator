@@ -39,9 +39,9 @@ You can also change the language detection for PaddleOCR in config.ini
 
 ```mermaid
 graph TD;
-    A[Image]-->B[Speech bubble segmentation model];
-    B[Speech bubble segmentation model]-->C[OCR all text within segmnetation];
-    C[OCR all text within segmnetation]-->D[Dranslate text];
+    A[Image]-->B[Generate segmentation area for each speech bubble];
+    B[Generate segmentation area for each speech bubble]-->C[OCR all text within segmentation];
+    C[OCR all text within segmentation]-->D[Translate text];
     D[Translate text]-->E[Generate text as image]
     E[Generate text as image]-->F[Overlap image on to original]
 ```
