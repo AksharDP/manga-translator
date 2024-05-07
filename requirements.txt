@@ -1,0 +1,6 @@
+deep_translator==1.11.4
+paddleocr==2.7.3
+Pillow==10.3.0
+ultralytics==8.2.5
+six==1.16.0
+requests==2.31.0
