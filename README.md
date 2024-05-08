@@ -2,6 +2,12 @@
 
 A manga translator that takes in images and translates the speech bubbles to english
 <hr/>
+
+<div align="center">
+
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Segmentation%20Model-yellow)](https://huggingface.co/AksharPatel/manga-speech-bubble-segmentation)
+
+</div>
 ## Installation
 
 PaddleOCR requires python 3.9 or below. For this we are going to use conda to create an environment
