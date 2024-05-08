@@ -61,16 +61,13 @@ graph TD;
     E[Generate text as image]-->F[Overlap image on to original]
 ```
 
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource.jpg">
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource.jpg" height="400" width="300"> <img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource.jpg" height="400" width="300">
 
 <br/>
 
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_2.jpg">
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_2.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_2.jpg" height="400" width="300"> <img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_2.jpg" height="400" width="300">
 
 <br/>
 
 
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_3.jpg">
-<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_3.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_3.jpg" height="400" width="300"> <img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_3.jpg" height="400" width="300">
