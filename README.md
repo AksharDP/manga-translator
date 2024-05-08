@@ -1,4 +1,4 @@
-# manga-translator
+# Manga Translator
 
 A manga translator that takes in images and translates the speech bubbles to english
 <hr/>
