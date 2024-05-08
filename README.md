@@ -40,7 +40,7 @@ You can also change the language detection for PaddleOCR in config.ini
 There are many ways to improve the program:
 
 * Train segmentation model to be more accurate, smaller, and faster. (Quantization, Threading, deploying via ONNX)
-* Train PaddleOCR for each language for better character word detection (especially for vertical text)
+* Train PaddleOCR for each language for better word detection (especially for vertical text)
 * Use a model or paid service for more accurate translations (maybe gpt 4 for languages that require context?)
 * Add detection for color of speech bubble and text for better looking speech bubbles
 * Change font and font size based on text (currently its the same font size and font)
