@@ -142,18 +142,19 @@ def handle_speech_bubbles(results):
 if __name__ == "__main__":
 
     # donwload segmentation model as best.pt
-    if not os.path.exists("best.pt"):
+    if not os.path.exists("model/best.pt"):
         print("Downloading segmentation model...")
+        os.makedirs("model", exist_ok=True)
         # download model through python not wget
         with requests.get(segmentation_model, stream=True) as r:
-            with open("best.pt", "wb") as f:
+            with open("model/best.pt", "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
             r.close()
         print("Segmentation model downloaded.")
 
     # speech bubble detection model
-    model = YOLO("best.pt")
+    model = YOLO("model/best.pt")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     conf = 0.3
     verbose = False
