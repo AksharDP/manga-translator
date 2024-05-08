@@ -53,3 +53,9 @@ graph TD;
 
 <img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_2.jpg">
 <img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_2.jpg">
+
+<br/>
+
+
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/resource_3.jpg">
+<img src="https://raw.githubusercontent.com/AksharDP/manga-translator/main/images/translated_resource_3.jpg">
