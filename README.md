@@ -35,7 +35,7 @@ python main.py
 ```
 Put all the images that you would like to translate into the input folder that is created when you run the program the first time.
 
-You can also change the language detection for PaddleOCR in config.ini
+You can change the language detection for PaddleOCR in config.ini
 
 There are many ways to improve the program:
 
