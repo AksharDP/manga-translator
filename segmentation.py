@@ -54,5 +54,4 @@ class segmentation:
             show_conf=self.show_conf,
             augment=self.augment,
         )[0]
-        # return masks
         return results

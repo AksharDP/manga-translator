@@ -44,25 +44,19 @@ def wrap_text(text, font, font_scale, thickness, max_width):
 
 
 def handle_speech_bubbles(results):
-    # Create a copy of the original image to draw the translated text on
     final_image = seg.image.copy()
 
     for i, r in enumerate(results):
-        # mask is an array of x, y coordinates. Create a crop of the mask from the image. The mask will be an irregular shape
         mask = np.array(r.masks[0].xy, np.int32)
-        # Ensure mask is a 2D array with shape (N, 2)
         mask = mask.reshape(-1, 2)
 
         masked_image_path = f"temp/mask_{i}.jpg"
         if not os.path.exists(masked_image_path):
             mask_image = np.zeros_like(seg.image)
             cv2.fillPoly(mask_image, [mask], (255, 255, 255))
-            # Apply the mask to the original image
             masked_image = cv2.bitwise_and(seg.image, mask_image)
-            # Save the masked image
             cv2.imwrite(masked_image_path, masked_image)
 
-        # Translate and get the text (assuming these functions are defined elsewhere)
         text = get_text(masked_image_path, language)
         print(f"Extracted text: {text}")
         if text is None:
@@ -70,19 +64,17 @@ def handle_speech_bubbles(results):
         translated_text = translate(text)
         print(f"Translated text: {translated_text}")
 
-        # Calculate the bounding box of the mask for text to fit within
         x_min, y_min = mask.min(axis=0)
         x_max, y_max = mask.max(axis=0)
         mask_width = x_max - x_min
         mask_height = y_max - y_min
 
-        # Wrap the text to fit within the mask width
         wrapped_lines, wrapped_width = wrap_text(
             translated_text, font, font_scale, thickness, mask_width
         )
         print(f"Wrapped text: {wrapped_lines}")
 
-        # Calculate the total height of the wrapped lines
+        # Calculate  total height of the wrapped lines
         total_height = 0
         for line in wrapped_lines:
             (line_width, line_height), _ = cv2.getTextSize(
@@ -129,7 +121,7 @@ def handle_speech_bubbles(results):
         # Overlay the new image with the text onto the final image using the original mask
         final_image = cv2.copyTo(text_image, text_mask, final_image)
 
-    # get original file name
+    # original file name
     file_name = os.path.basename(seg.image_path)
     # Save the final image with all the translated text
     cv2.imwrite(f"output/translated_{file_name}", final_image)
@@ -141,11 +133,19 @@ def handle_speech_bubbles(results):
 
 if __name__ == "__main__":
 
-    # donwload segmentation model as best.pt
+    if not os.path.exists("input"):
+        os.makedirs("input")
+        print("Input folder created. Put images to be processed in the input folder.")
+        sys.exit(1)
+    if not os.path.exists("output"):
+        os.makedirs("output")
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
+    if not os.path.exists("model"):
+        os.makedirs("model")
+
     if not os.path.exists("model/best.pt"):
         print("Downloading segmentation model...")
-        os.makedirs("model", exist_ok=True)
-        # download model through python not wget
         with requests.get(segmentation_model, stream=True) as r:
             with open("model/best.pt", "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
@@ -162,16 +162,8 @@ if __name__ == "__main__":
     show_conf = False
     augment = False
 
-    if not os.path.exists("input"):
-        os.makedirs("input")
-        os.makedirs("temp")
-        os.makedirs("output")
-        print("Input folder created. Put images to be processed in the input folder.")
-        sys.exit(1)
-
     files = os.listdir("input")
     for file in files:
-
         seg = segmentation(
             f"input/{file}",
             model,
@@ -187,3 +179,4 @@ if __name__ == "__main__":
             print(f"no masks found for {seg.image}")
             continue
         handle_speech_bubbles(results)
+    print("All images processed.")
